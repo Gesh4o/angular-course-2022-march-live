@@ -1,0 +1,11 @@
+<div #title>
+    Game: {{sourceGame.title && sourceGame.title.length}}
+</div>
+
+<div style="color: red"  *ngIf="sourceGame.price < 50">
+    Price: {{sourceGame.price}}
+</div>
+
+<div>
+    <img [attr.src]="sourceGame.img" [alt]="sourceGame.title +'\'s image'" width="100px">
+</div>

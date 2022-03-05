@@ -73,7 +73,6 @@ namespace Vehicle {
 
     export enum Truck {
         Ford = 'ford',
-
     }
 }
 
@@ -99,12 +98,16 @@ const car: {
         power: number,
     },
     doors: number,
+    drive: () => void
 } = {
     model: Vehicle.Car.Renault,
     engine: {
         power: 506
     },
-    doors: 2
+    doors: 2,
+    drive: function () {
+        console.log('');
+    }
 };
 
 // Casting 'car' to truck is possible with using type 'any'.
