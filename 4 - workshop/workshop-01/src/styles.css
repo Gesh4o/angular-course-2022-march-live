@@ -1,1 +1,39 @@
+@import url('./assets/styles/reset.css');
+@import url('./assets/styles/layout.css');
+@import url('./assets/styles/typography.css');
+@import url('./assets/styles/responsive.css');
+
 /* You can add global styles to this file, and also import other style files */
+body {
+    max-width: 1366px;
+    margin: auto;
+    position: relative;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding-bottom: 4.5em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+h2 {
+    text-align: center;
+    border-bottom: 1px dashed #999;
+}
+
+span {
+    font-weight: bold;
+}
+
+button {
+    background-color: #4ebced;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+}
