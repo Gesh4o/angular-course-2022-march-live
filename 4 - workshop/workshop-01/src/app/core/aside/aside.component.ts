@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ContentService } from 'src/app/content.service';
+import { IPost } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-aside',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsideComponent implements OnInit {
 
-  constructor() { }
+  posts: IPost[] = [];
+
+  constructor(private contentService: ContentService) { }
 
   ngOnInit(): void {
+    this.contentService.getRecentPosts$().subscribe(posts => this.posts = posts);
   }
 
 }
