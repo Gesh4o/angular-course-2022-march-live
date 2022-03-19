@@ -35,3 +35,7 @@ table tfoot td {
 table tbody tr:nth-child(even) td {
     background: #CCC;
 }
+
+router-outlet + * {
+    width: 100% !important;
+  }

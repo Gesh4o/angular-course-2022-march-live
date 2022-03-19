@@ -1,6 +1,8 @@
 :host {
   display: flex;
   justify-content: space-around;
+  width: 100%;
+  
 }
 
 main {
@@ -12,3 +14,8 @@ aside {
   margin-top: 1em;
   font-size: 0.8em;
 }
+
+
+/* router-outlet + * {
+  width: 100% !important;
+} */

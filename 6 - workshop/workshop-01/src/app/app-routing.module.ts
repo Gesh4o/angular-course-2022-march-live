@@ -1,5 +1,6 @@
 import { RouterModule, Routes } from "@angular/router";
 import { HomePageComponent } from "./feature/pages/home-page/home-page.component";
+import { PageNotFoundPageComponent } from "./feature/pages/page-not-found-page/page-not-found-page.component";
 
 const routes: Routes = [
     {
@@ -10,6 +11,10 @@ const routes: Routes = [
     {
         path: 'home',
         component: HomePageComponent
+    },
+    {
+        path: '**',
+        component: PageNotFoundPageComponent
     }
 ];
 
