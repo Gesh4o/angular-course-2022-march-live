@@ -3,16 +3,31 @@
     <form #laptopForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="processor">Proccessor</label>
-            <input name="processor" ngModel type="text" class="form-control" id="processor" required>
+            <input #processor="ngModel" name="processor" ngModel type="text" class="form-control" id="processor"
+                required minlength="5" [attr.aria-invalid]="processor.invalid" emailß>
+
+            <ng-container *ngIf="processor.touched && processor.invalid">
+                <div *ngIf="processor.errors?.['required']" class="alert alert-danger">
+                    Processor is required!
+                </div>
+
+                <div *ngIf="processor.errors?.['minlength']" class="alert alert-danger">
+                    Processor must be more than 5 characters long!
+                </div>
+            </ng-container>
         </div>
-        <div class="form-group">
-            <label for="ram">RAM</label>
-            <input name="ram" ngModel type="text" class="form-control" id="ram" required>
+
+        <div ngModelGroup="storage" #storageGroup="ngModelGroup">
+            <div class="form-group">
+                <label for="ram">RAM</label>
+                <input name="ram" ngModel type="text" class="form-control" id="ram" required>
+            </div>
+            <div class="form-group">
+                <label for="hardDisk">Hard Disk (GB)</label>
+                <input name="hardDisk" ngModel type="number" class="form-control" id="hardDisk">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="hardDisk">Hard Disk (GB)</label>
-            <input name="hardDisk" ngModel type="number" class="form-control" id="hardDisk">
-        </div>
+
 
         <div class="form-group">
             <label for="os">Operating System</label>
@@ -21,7 +36,8 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="button" (click)="clearForm()" class="btn btn-link">Clear</button>
+        <button [disabled]="laptopForm.invalid" type="submit" class="btn btn-success">Submit</button>
 
     </form>
 </div>

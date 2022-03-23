@@ -6,7 +6,8 @@ import { DirectivesDemoComponent } from './directives-demo/directives-demo.compo
 import { HightlightDemoComponent } from './hightlight-demo/hightlight-demo.component';
 import { HighlightDirective } from './highlight.directive';
 import { TemplateFormsDemoComponent } from './template-forms-demo/template-forms-demo.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsDemoComponent } from './reactive-forms-demo/reactive-forms-demo.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +15,13 @@ import { FormsModule } from '@angular/forms';
     DirectivesDemoComponent,
     HightlightDemoComponent,
     HighlightDirective,
-    TemplateFormsDemoComponent
+    TemplateFormsDemoComponent,
+    ReactiveFormsDemoComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
