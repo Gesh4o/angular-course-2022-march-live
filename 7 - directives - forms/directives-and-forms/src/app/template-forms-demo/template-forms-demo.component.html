@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>Laptop Form</h1>
+    <form #laptopForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="processor">Proccessor</label>
+            <input name="processor" ngModel type="text" class="form-control" id="processor" required>
+        </div>
+        <div class="form-group">
+            <label for="ram">RAM</label>
+            <input name="ram" ngModel type="text" class="form-control" id="ram" required>
+        </div>
+        <div class="form-group">
+            <label for="hardDisk">Hard Disk (GB)</label>
+            <input name="hardDisk" ngModel type="number" class="form-control" id="hardDisk">
+        </div>
+
+        <div class="form-group">
+            <label for="os">Operating System</label>
+            <select class="form-control" id="os" required name="os" ngModel>
+                <option *ngFor="let os of operatingSystems" [value]="os">{{os}}</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+</div>
