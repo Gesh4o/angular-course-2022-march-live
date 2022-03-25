@@ -1,0 +1,7 @@
+<div *ngIf="themeList">
+  <app-theme-list-item *ngFor="let theme of themeList" [theme]="theme"></app-theme-list-item>
+  <div *ngIf="themeList.length === 0">No Themes!</div>
+</div>
+<div *ngIf="!themeList">
+  Loading...
+</div>
