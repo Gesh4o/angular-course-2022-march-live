@@ -9,6 +9,7 @@ import { ThemesRoutingModule } from './themes-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ThemesDetailPageComponent } from './themes-detail-page/themes-detail-page.component';
 import { ThemesNewPageComponent } from './themes-new-page/themes-new-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ThemesNewPageComponent } from './themes-new-page/themes-new-page.compon
     CommonModule,
     SharedModule,
     ThemesRoutingModule,
+    FormsModule
   ], exports: [
 
   ]

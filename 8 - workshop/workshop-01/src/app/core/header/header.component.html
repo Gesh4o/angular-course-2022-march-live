@@ -16,7 +16,7 @@
     <div class="mini-navbar" *ngIf="isLogged">
       <ul>
         <li>
-          <a routerLink="/profile">John's Profile</a>
+          <a routerLink="/profile">{{currentUser.username}}'s Profile</a>
         </li>
         <li>
           <a href="#" (click)="logoutHandler()">Logout</a>

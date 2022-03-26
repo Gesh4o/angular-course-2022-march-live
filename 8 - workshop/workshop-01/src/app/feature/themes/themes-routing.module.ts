@@ -11,7 +11,8 @@ const routes: Routes = [
     },
     {
         path: 'themes/new',
-        canActivate: [AuthGuard],
+        // TODO stoimenovg: uncomment below.
+        // canActivate: [AuthGuard],
         component: ThemesNewPageComponent,
     },
     {

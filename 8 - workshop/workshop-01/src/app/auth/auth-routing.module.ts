@@ -15,7 +15,8 @@ const routes: Routes = [
     },
     {
         path: 'profile',
-        canActivate: [AuthGuard],
+        // TODO stoimenovg: uncomment.
+        // canActivate: [AuthGuard],
         component: ProfileComponent,
     }
 ]
