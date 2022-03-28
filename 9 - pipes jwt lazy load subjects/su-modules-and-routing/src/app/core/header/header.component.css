@@ -1,0 +1,13 @@
+ul {
+    display: flex;
+}
+
+ul>li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+ul>li:last-of-type {
+    flex: 1 1 auto;
+    text-align: end;
+}

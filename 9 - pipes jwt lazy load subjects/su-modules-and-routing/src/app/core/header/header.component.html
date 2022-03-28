@@ -1,0 +1,22 @@
+<ul>
+    <li> <a routerLink="/home">Home</a></li>
+    <li> <a routerLink="/customer">Customers</a></li>
+    <li> <a routerLink="/login">Login</a></li>
+    <li> <a routerLink="/about">About</a></li>
+
+
+    <li>
+        <form #themeForm="ngForm">
+            Theme:
+            <span>
+                <label for="dark"> Dark</label>
+                <input id="dark" type="radio" name="theme" ngModel  value="dark">
+            </span>
+
+            <span>
+                <label for="light">Light</label>
+                <input id="light" type="radio" name="theme" ngModel value="light">
+            </span>
+        </form>
+    </li>
+</ul>

@@ -1,0 +1,29 @@
+<a [routerLink]="['/customer', id - 1 === 0 ? 10 : id - 1]"> Previous User</a>
+
+<div *ngIf="!isLoading; else loadingIndicator">
+    <div *ngIf="!!customer">
+        <p>
+            Name: {{customer.name}}
+        </p>
+
+        <p>
+            Phone: {{customer.phone}}
+        </p>
+
+        <p>
+            Email: {{customer.email}}
+        </p>
+
+
+        <ul>
+            <li> <a [routerLink]="['/customer', customer.id, 'posts']">Posts</a> </li>
+            <li> <a [routerLink]="['/customer', customer.id, 'albums']">Albums</a> </li>
+        </ul>
+
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<ng-template #loadingIndicator>
+    Loading... <mat-spinner></mat-spinner>
+</ng-template>
