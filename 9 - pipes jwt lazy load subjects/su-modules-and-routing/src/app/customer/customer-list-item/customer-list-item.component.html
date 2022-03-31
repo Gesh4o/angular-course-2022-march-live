@@ -1,4 +1,21 @@
-<p>
-    {{item.name}} 
+<div>
+    <!-- <div>
+        {{date }}
+    </div> 
+    <div>
+        {{date | date: 'MM/dd/yyyy' }}
+    </div> -->
+
+    <div (click)="handleExpand()">
+        {{item.name | shorten:limit | lowercase }}
+    </div>
+
+    <!-- <div (click)="handleExpand()">
+        {{ shorten(item.name) }}
+    </div> -->
+
+    <div>
+        <!-- {{ item | myJson }} -->
+    </div>
     <a [routerLink]="['/customer', item.id]"> See Profile</a>
-</p>
+</div>

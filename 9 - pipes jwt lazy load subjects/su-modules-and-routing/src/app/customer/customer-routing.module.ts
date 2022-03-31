@@ -5,13 +5,15 @@ import { CustomerProfileAlbumsComponent } from "./customer-profile-albums/custom
 import { CustomerProfilePostsComponent } from "./customer-profile-posts/customer-profile-posts.component";
 import { CustomerProfileComponent } from "./customer-profile/customer-profile.component";
 
+// customer/
 export const CustomerRoutingModule = RouterModule.forChild([
     {
-        path: 'customer',
+        path: '',
+        pathMatch: 'full',
         component: CustomerListComponent,
     },
     {
-        path: 'customer/:id',
+        path: ':id',
         // canActivate: [ProfileGuard],
         // resolve: { posts: CustomerPostsResolver },
 

@@ -25,6 +25,10 @@ const routes: Routes = [
     component: AboutComponent
   },
   {
+    path: 'customer',
+    loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule)
+  },
+  {
     path: 'login',
     component: LoginComponent
   },
