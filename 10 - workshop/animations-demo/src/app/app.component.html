@@ -1,0 +1,13 @@
+<div id="animeContainer" [@listAnimation]="items.length">
+  <button (click)="pushItem()">Add item</button>
+  <button (click)="removeItem()">Remove item</button>
+
+  <div id="list" *ngFor="let item of items">
+      {{item}}
+  </div>
+  <div @explainerAnim>
+      <div class="col"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div>
+      <div class="col"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div>
+      <div class="col"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div>
+  </div>
+</div>

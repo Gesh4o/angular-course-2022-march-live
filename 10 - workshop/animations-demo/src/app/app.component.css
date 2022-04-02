@@ -1,0 +1,25 @@
+#animeContainer {
+    padding: 2rem;
+}
+
+#list {
+    padding: 1rem;
+    display: block;
+    background: FFF;
+    margin-bottom: 10px;
+}
+
+button {
+    border: none;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: blueviolet;
+    color: #fff;
+}
+
+.col {
+    width: 33%;
+    display: block;
+    padding: 40px 0;
+    color: gray;
+}
