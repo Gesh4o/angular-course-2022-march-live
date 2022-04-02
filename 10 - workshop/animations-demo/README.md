@@ -1,3 +1,6 @@
+# This project is a follow-up on a SLI-DO question
+It is not part of the official lecture/exercises!
+
 # AnimationsDemo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
