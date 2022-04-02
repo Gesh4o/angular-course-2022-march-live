@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/core/user.service';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-themes-page',
@@ -8,9 +9,9 @@ import { UserService } from 'src/app/core/user.service';
 })
 export class ThemesPageComponent implements OnInit {
 
-  isLoggedIn: boolean = this.userService.isLogged;
+  isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
 
-  constructor(private userService: UserService) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {

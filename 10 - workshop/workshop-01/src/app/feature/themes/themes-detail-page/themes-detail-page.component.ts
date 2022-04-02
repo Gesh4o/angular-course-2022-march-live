@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth.service';
 import { IPost, ITheme } from 'src/app/core/interfaces';
 import { ThemeService } from 'src/app/core/theme.service';
 import { UserService } from 'src/app/core/user.service';
@@ -13,11 +15,11 @@ export class ThemesDetailPageComponent implements OnInit {
   theme: ITheme<IPost>;
 
   canSubscribe: boolean = false;
-  isLoggedIn: boolean = this.userService.isLogged;
+  isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private themeService: ThemeService,
-    private userService: UserService) { }
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {

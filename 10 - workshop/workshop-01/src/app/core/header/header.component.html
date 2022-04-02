@@ -3,23 +3,23 @@
     <div class="logo-wrap">
       <p class="logo"><span class="logo">SoftUni Forum</span></p>
     </div>
-    <div class="mini-navbar" *ngIf="!isLogged">
+    <div class="mini-navbar" *ngIf="!(isLoggedIn$ | async)">
       <ul>
         <li>
-          <a routerLink="/login">Login</a>
+          <a routerLink="/user/login">Login</a>
         </li>
         <li>
-          <a routerLink="/register">Register</a>
+          <a routerLink="/user/register">Register</a>
         </li>
       </ul>
     </div>
-    <div class="mini-navbar" *ngIf="isLogged">
+    <div class="mini-navbar" *ngIf="(isLoggedIn$ | async)">
       <ul>
         <li>
-          <a routerLink="/profile">{{currentUser.username}}'s Profile</a>
+          <a routerLink="/profile">{{( currentUser$ | async).username}}'s Profile</a>
         </li>
         <li>
-          <a href="#" (click)="logoutHandler()">Logout</a>
+          <a href="javascript:void(0);" (click)="logoutHandler()">Logout</a>
         </li>
       </ul>
     </div>
@@ -35,6 +35,11 @@
       <li>
         <a routerLink="/themes/new">New Theme</a>
       </li>
+
+      <p *ngIf="!!message" [ngClass]="{'error-message': isMessageError, 'success-message': !isMessageError}"
+        class="notification">
+        {{message}}
+      </p>
     </ul>
   </nav>
 </header>

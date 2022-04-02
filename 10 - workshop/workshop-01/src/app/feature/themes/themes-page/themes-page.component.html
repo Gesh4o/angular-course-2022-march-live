@@ -1,5 +1,5 @@
 <main>
-    <div *ngIf="!isLoggedIn" class="container">
+    <div *ngIf="!(isLoggedIn$ | async)" class="container">
         <app-welcome></app-welcome>
     </div>
     <app-theme-list></app-theme-list>
