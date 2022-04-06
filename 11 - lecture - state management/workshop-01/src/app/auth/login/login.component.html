@@ -1,0 +1,44 @@
+<form class="login" [formGroup]="loginFormGroup" (ngSubmit)="handleLogin()">
+    <fieldset>
+        <h2>Login Form</h2>
+
+        <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
+
+        <p class="field field-icon">
+            <label for="email"><span><i class="fas fa-envelope"></i></span></label>
+            <input formControlName="email" type="email" name="email" id="email" placeholder="john.doe@gmail.com">
+        </p>
+        <ng-container *ngIf="loginFormGroup.controls['email'].touched && loginFormGroup.controls['email'].invalid">
+            <p *ngIf="loginFormGroup.controls['email'].errors.required" class="error">
+                Email is required!
+            </p>
+
+            <p *ngIf="loginFormGroup.controls['email'].errors.email" class="error">
+                Email is not valid!
+            </p>
+        </ng-container>
+
+        <p class="field field-icon">
+            <label for="password"><span><i class="fas fa-lock"></i></span></label>
+            <input formControlName="password" type="password" name="password" id="password" placeholder="******">
+        </p>
+
+        <ng-container
+            *ngIf="loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid">
+            <p *ngIf="loginFormGroup.controls['password'].errors.required" class="error">
+                Password is required!
+            </p>
+            <p *ngIf="loginFormGroup.controls['password'].errors.minlength" class="error">
+                Password must be at least 5 characters!
+            </p>
+        </ng-container>
+        
+        <button (click)="loginHandler()">Login</button>
+
+        <p class="text-center">
+            Have an account?
+            <a href="#">Register</a>
+        </p>
+
+    </fieldset>
+</form>

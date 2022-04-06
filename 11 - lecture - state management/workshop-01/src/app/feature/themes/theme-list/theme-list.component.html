@@ -1,0 +1,12 @@
+<form >
+
+  <input [formControl]="searchControl" type="text" placeholder="Search for posts">
+</form>
+
+<div *ngIf="themeList">
+  <app-theme-list-item *ngFor="let theme of themeList" [theme]="theme"></app-theme-list-item>
+  <div *ngIf="themeList.length === 0">{{localize('no-themes-message', l10n)}}</div>
+</div>
+<div *ngIf="!themeList">
+  Loading...
+</div>
