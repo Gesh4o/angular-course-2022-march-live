@@ -1,8 +1,8 @@
 <div class="profile"><img src="/assets/profile.png" alt="default user">
     <h3>User Info:</h3>
 
-    <ng-container *ngIf="!!currentUser">
-        <ng-container *ngIf="!isInEditMode">
+    <ng-container *ngIf="(currentUser$ | async) as currentUser">
+        <ng-container *ngIf="!(isInEditMode$ | async)">
             <div class="flex">
                 <p>Username: </p>
                 <p>{{currentUser.username}}</p>
@@ -16,10 +16,10 @@
                 <p>{{currentUser.tel}}</p>
             </div>
 
-            <button (click)="enterEditMode()" class="edit-button">Edit</button>
+            <button (click)="enterEditMode(currentUser)" class="edit-button">Edit</button>
         </ng-container>
 
-        <ng-container *ngIf="isInEditMode">
+        <ng-container *ngIf="isInEditMode$ | async">
             <form #editProfileForm="ngForm" (ngSubmit)="updateProfile()">
                 <div class="flex">
                     <p>Username: </p>
@@ -38,7 +38,7 @@
                         <input ngModel type="text" name="tel" id="tel" value="885 888 888">
                     </div>
                 </div>
-                <button type="button" (click)="isInEditMode = false" class="red-button">Cancel</button>
+                <button type="button" (click)="exitEditMode()" class="red-button">Cancel</button>
                 <button  [disabled]="editProfileForm.invalid" class="green-button">Save</button>
             </form>
         </ng-container>

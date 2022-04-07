@@ -1,8 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { IUser } from 'src/app/core/interfaces';
 import { UserService } from 'src/app/core/user.service';
+import { IAuthModuleState } from '../+store';
+import { enterEditMode, exitEditMode, profileLoaded, profilePageInitalized } from '../+store/actions';
 
 @Component({
   selector: 'app-profile',
@@ -13,35 +18,52 @@ export class ProfileComponent implements OnInit {
 
   @ViewChild('editProfileForm') editProfileForm: NgForm;
 
-  currentUser: IUser;
+  // currentUser: IUser;
 
-  isInEditMode: boolean = false;
+  currentUser$: Observable<IUser> = this.store.select(state => state.auth.profile.currentProfile)
+    // .pipe(tap(profile => this.currentUser = profile))
+    ;
 
-  constructor(private userService: UserService, private router: Router) { }
+  isInEditMode$: Observable<boolean> = this.store.select(state => state.auth.profile.isInEditMode);
+
+  hasErrorHappened: Observable<boolean> = this.store.select(state => state.auth.profile.errorHappened);
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private store: Store<IAuthModuleState>
+  ) { }
 
   ngOnInit(): void {
-    this.userService.getProfile$().subscribe({
-      next: (user) => {
-        this.currentUser = user;
-      },
-      error: () => {
+    this.store.dispatch(profilePageInitalized());
+
+    this.hasErrorHappened.subscribe((hasError) => {
+      if (hasError) {
         this.router.navigate(['/user/login'])
       }
     })
+    // this.userService.getProfile$().subscribe({
+    //   next: (user) => {
+    //     this.store.dispatch(profileLoaded({ profile: user }));
+    //   },
+    //   error: () => {
+    //   this.router.navigate(['/user/login'])
+    //   }
+    // })
   }
 
-  enterEditMode(): void {
-    this.isInEditMode = true;
+  enterEditMode(currentUser: IUser): void {
+    this.store.dispatch(enterEditMode());
 
     setTimeout(() => {
       this.editProfileForm.form.patchValue({
-        email: this.currentUser.email,
-        username: this.currentUser.username,
-        'select-tel': this.currentUser.tel && this.currentUser.tel.length > 4
-          ? this.currentUser.tel.substring(0, 4) : '',
-        tel: this.currentUser.tel && this.currentUser.tel.length > 4
-          ? this.currentUser.tel.substring(4) :
-          this.currentUser.tel
+        email: currentUser.email,
+        username: currentUser.username,
+        'select-tel': currentUser.tel && currentUser.tel.length > 4
+          ? currentUser.tel.substring(0, 4) : '',
+        tel: currentUser.tel && currentUser.tel.length > 4
+          ? currentUser.tel.substring(4) :
+          currentUser.tel
       })
     });
   }
@@ -50,7 +72,10 @@ export class ProfileComponent implements OnInit {
     // TODO stoimenovg: continue.
     console.log(this.editProfileForm.value);
 
-    this.isInEditMode = false;
+    this.exitEditMode();
   }
 
+  exitEditMode(): void {
+    this.store.dispatch(exitEditMode());
+  }
 }

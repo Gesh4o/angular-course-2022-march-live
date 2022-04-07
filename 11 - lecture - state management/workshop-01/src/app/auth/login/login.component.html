@@ -2,7 +2,9 @@
     <fieldset>
         <h2>Login Form</h2>
 
-        <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
+        <p *ngIf="(errorMessage$ | async) as errorMessage" class="error">
+            {{errorMessage}}
+        </p>
 
         <p class="field field-icon">
             <label for="email"><span><i class="fas fa-envelope"></i></span></label>
@@ -32,8 +34,11 @@
                 Password must be at least 5 characters!
             </p>
         </ng-container>
-        
-        <button (click)="loginHandler()">Login</button>
+
+        <div>
+            IsLoginPending: {{(isLoginPending$ | async)}}
+        </div>
+        <button [disabled]="(isLoginPending$ | async)" (click)="loginHandler()">Login</button>
 
         <p class="text-center">
             Have an account?

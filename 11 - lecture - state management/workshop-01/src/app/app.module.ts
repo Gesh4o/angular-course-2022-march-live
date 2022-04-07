@@ -1,17 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './core/header/header.component';
-import { FooterComponent } from './core/footer/footer.component';
-import { CoreModule } from './core/core.module';
-import { ThemesModule } from './feature/themes/themes.module';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { PagesModule } from './feature/pages/pages.module';
+import { StoreModule } from '@ngrx/store';
+import { IRootState, counterReducer, currentUserReducer } from './+store';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './auth/auth.module';
+import { AppComponent } from './app.component';
 import { AuthService } from './auth.service';
+import { CoreModule } from './core/core.module';
+import { FooterComponent } from './core/footer/footer.component';
+import { HeaderComponent } from './core/header/header.component';
+import { PagesModule } from './feature/pages/pages.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,15 @@ import { AuthService } from './auth.service';
     CoreModule.forRoot(),
     AppRoutingModule,
     PagesModule,
+    StoreModule.forRoot<IRootState>({
+      counter: counterReducer,
+      currentUser: currentUserReducer,
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     {

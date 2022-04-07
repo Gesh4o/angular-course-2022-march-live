@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { IRootState, login, logout } from './+store';
 import { IUser } from './core/interfaces';
 import { CreateUserDto } from './core/user.service';
 
@@ -10,12 +12,10 @@ import { CreateUserDto } from './core/user.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private _currentUser = new BehaviorSubject<IUser>(undefined);
-
-  currentUser$ = this._currentUser.asObservable();
+  currentUser$ = this.store.select(globalState => globalState.currentUser);
   isLoggedIn$ = this.currentUser$.pipe(map(user => !!user));
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private store: Store<IRootState>) {
   }
 
   login$(userData: { email: string, password: string }): Observable<IUser> {
@@ -44,10 +44,10 @@ export class AuthService {
   }
 
   handleLogin(newUser: IUser) {
-    this._currentUser.next(newUser);
+    this.store.dispatch(login({ user: newUser }));
   }
 
   handleLogout() {
-    this._currentUser.next(undefined);
+    this.store.dispatch(logout());
   }
 }
