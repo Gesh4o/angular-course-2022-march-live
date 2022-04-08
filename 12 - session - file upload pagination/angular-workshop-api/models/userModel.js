@@ -43,7 +43,11 @@ const userSchema = new mongoose.Schema({
     posts: [{
         type: ObjectId,
         ref: "Post"
-    }]
+    }],
+    profilePicture: {
+        type: String,
+        required: false
+    }
 }, { timestamps: { createdAt: 'created_at' } });
 
 userSchema.methods = {

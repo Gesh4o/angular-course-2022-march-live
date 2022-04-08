@@ -3,14 +3,14 @@
     <div class="theme-title">
         <div class="theme-name-wrapper">
             <div class="theme-name">
-                <h2>{{ theme.themeName}}</h2>
+                <h2>{{ theme.themeName}} {{isUserOwner}}</h2>
                 <p>Date: <time> {{theme.created_at | date:'short'}}</time></p>
             </div>
             <div class="subscribers">
                 <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                 <ng-container *ngIf="(isLoggedIn$ | async)">
-                    <button *ngIf="canSubscribe" class="subscribe">Subscribe</button>
-                    <button *ngIf="!canSubscribe" class="unsubscribe">Unsubscribe</button>
+                    <button (click)="subscribe()" *ngIf="canSubscribe" class="subscribe">Subscribe</button>
+                    <button (click)="unsubscribe()" *ngIf="!canSubscribe" class="unsubscribe">Unsubscribe</button>
                 </ng-container>
             </div>
         </div>
@@ -29,8 +29,9 @@
             </div>
         </div>
         <div class="footer">
-            <i *ngIf="(isLoggedIn$ | async) && canLike(comment)" class="fas fa-thumbs-up"></i>
-            <i *ngIf="(isLoggedIn$ | async) && !canLike(comment)" class="fas fa-thumbs-down"></i>
+            <i (click)="like(comment)" *ngIf="(isLoggedIn$ | async) && canLike(comment)" class="fas fa-thumbs-up"></i>
+            <i (click)="unlike(comment)" *ngIf="(isLoggedIn$ | async) && !canLike(comment)"
+                class="fas fa-thumbs-down"></i>
             <p><span>{{comment.likes.length}}</span> likes</p>
         </div>
     </div>

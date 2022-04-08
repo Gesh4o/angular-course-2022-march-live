@@ -23,9 +23,12 @@ export class ProfileEffects {
     // The 2 effects below were added offline.
     onProfileUpdateStarted$ = createEffect(() => this.actions$.pipe(
         ofType(updateProfileStarted),
-        mergeMap(action => this.userService.updateProfile$(action.user)),
-        map(result => updateProfileCompleted({ updatedUser: result })),
-        catchError(err => of(updateProfileError({ errorMessage: err.error.message }))),
+        mergeMap(action => this.userService.updateProfile$(action.user)
+            .pipe(
+                map(result => updateProfileCompleted({ updatedUser: result })),
+                catchError(err => of(updateProfileError({ errorMessage: err.error.message })))
+            )
+        ),
     ))
 
     onProfileUpdateCompleted$ = createEffect(() => this.actions$.pipe(

@@ -1,6 +1,20 @@
-<form >
-
+<form>
   <input [formControl]="searchControl" type="text" placeholder="Search for posts">
+
+
+  <div>
+    <button [disabled]="currentPage === 0" (click)="goOnePageBack()">Previous Page</button>
+
+    Showing {{(currentPage * pageSize) + 1}}-{{
+    (currentPage + 1) * pageSize > totalResults ? totalResults :(currentPage + 1) * pageSize
+    }} of {{totalResults}} results
+
+    <!-- total: 9 -->
+    <!-- 1-4, 5-8, 9 -->
+    <!-- 3 * 4 = 12 > 9 -->
+    <!-- (currentPage + 1) * pageSize <= totalResults -->
+    <button [disabled]="(currentPage + 1) * pageSize >= totalResults" (click)="goOnePageForward()">Next Page</button>
+  </div>
 </form>
 
 <div *ngIf="themeList">

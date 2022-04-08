@@ -28,6 +28,8 @@ export class ProfileComponent implements OnInit {
 
   hasErrorHappened: Observable<boolean> = this.store.select(state => state.auth.profile.errorHappened);
 
+  newProfilePicture?: File;
+
   constructor(
     private userService: UserService,
     private router: Router,
@@ -79,6 +81,7 @@ export class ProfileComponent implements OnInit {
         username: this.editProfileForm.value.username,
         email: this.editProfileForm.value.email,
         tel: countryPrefix + this.editProfileForm.value.tel,
+        profilePicture: this.newProfilePicture,
       }
     }));
     // End of offline update.
@@ -92,5 +95,10 @@ export class ProfileComponent implements OnInit {
 
   exitEditMode(): void {
     this.store.dispatch(exitEditMode());
+  }
+
+  handleProfilePictureChange(event: InputEvent) {
+    const input: HTMLInputElement = event.target as HTMLInputElement;
+    this.newProfilePicture = input.files[0];
   }
 }

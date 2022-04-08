@@ -1,4 +1,4 @@
-<div class="profile"><img src="/assets/profile.png" alt="default user">
+<div class="profile"><img [src]="(currentUser$ | async).profilePicture || '/assets/profile.png'" alt="default user">
     <h3>User Info:</h3>
 
     <ng-container *ngIf="(currentUser$ | async) as currentUser">
@@ -27,7 +27,8 @@
                 </div>
                 <div class="flex">
                     <p>Email: </p>
-                    <input #email="ngModel" [class.input-error]="email.touched && email.invalid" type="email" name="email" id="email" ngModel required emailValidator value="john.doe@gmail.com">
+                    <input #email="ngModel" [class.input-error]="email.touched && email.invalid" type="email"
+                        name="email" id="email" ngModel required emailValidator value="john.doe@gmail.com">
                 </div>
                 <div class="flex">
                     <p>Phone: </p>
@@ -38,8 +39,15 @@
                         <input ngModel type="text" name="tel" id="tel" value="885 888 888">
                     </div>
                 </div>
+
+                <div class="flex">
+                    <p>Profile Picture: </p>
+                    <input type="file" accept="image/png" id="profile-picture"
+                        (change)="handleProfilePictureChange($event)">
+                </div>
+
                 <button type="button" (click)="exitEditMode()" class="red-button">Cancel</button>
-                <button  [disabled]="editProfileForm.invalid" class="green-button">Save</button>
+                <button [disabled]="editProfileForm.invalid" class="green-button">Save</button>
             </form>
         </ng-container>
     </ng-container>
