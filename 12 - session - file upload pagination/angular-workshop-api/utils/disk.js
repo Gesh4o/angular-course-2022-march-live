@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const fs = require('fs');
 
 const auth = new google.auth.GoogleAuth({
-    keyFile: './config/disk-su-demo-d390ef6b6111.json',
+    keyFile: './config/softuni-live-disk-demo-24ca50e58fa8.json',
     scopes: ['https://www.googleapis.com/auth/drive'],
 });
 
@@ -20,12 +20,11 @@ const drive = google.drive({
 function uploadFile(file) {
     var fileMetadata = {
         name: `${crypto.randomBytes(20).toString('hex')}.png`,
-        parents: ['1UBNlhRw6bnJsEGwLkNf3HFEjhT5y7Neg'],
-
     };
     var media = {
         mimeType: 'image/png',
-        body: fs.createReadStream(file.path)
+        parent: ['1txnEYLZ-s3Ayfcx4Y_WzuiOGoj17VShm'],
+        body: fs.createReadStream(file.path),
     };
 
     return drive.files.create({
