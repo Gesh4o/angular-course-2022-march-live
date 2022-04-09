@@ -20,10 +20,10 @@ const drive = google.drive({
 function uploadFile(file) {
     var fileMetadata = {
         name: `${crypto.randomBytes(20).toString('hex')}.png`,
+        parents: ['1txnEYLZ-s3Ayfcx4Y_WzuiOGoj17VShm'],
     };
     var media = {
         mimeType: 'image/png',
-        parent: ['1txnEYLZ-s3Ayfcx4Y_WzuiOGoj17VShm'],
         body: fs.createReadStream(file.path),
     };
 
